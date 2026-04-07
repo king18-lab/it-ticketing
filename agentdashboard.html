@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support Agent Dashboard - IT Ticketing Tool</title>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', -apple-system, sans-serif;
+        }
+
+        :root {
+            --primary: #10b981;
+            --primary-dark: #0e9f6e;
+            --primary-light: #6ee7b7;
+            --dark-bg: #0a0c12;
+            --dark-card: #0f111a;
+            --dark-light: #1a1e2a;
+            --white: #ffffff;
+            --gray-light: #e0e0e0;
+            --gray-medium: #9e9e9e;
+            --success: #4caf50;
+            --danger: #ff6b6b;
+            --warning: #ffa726;
+            --info: #2196f3;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            min-height: 100vh;
+            color: var(--white);
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            background: var(--dark-card);
+            box-shadow: 0 2px 10px rgba(247, 200, 115, 0.2);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        .nav-logo span {
+            color: var(--white);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-link {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            border-radius: 6px;
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+            background: rgba(247, 200, 115, 0.1);
+        }
+
+        .nav-link.active {
+            color: var(--primary);
+            background: rgba(247, 200, 115, 0.15);
+            font-weight: 600;
+            border-left: 3px solid var(--primary);
+        }
+
+        .nav-link i {
+            width: 18px;
+            height: 18px;
+        }
+
+        .profile-dropdown {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .profile-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 16px;
+            background: var(--dark-light);
+            border-radius: 40px;
+            border: 1px solid var(--primary);
+        }
+
+        .profile-btn img {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--primary);
+        }
+
+        .profile-btn span {
+            color: var(--white);
+        }
+
+        .dropdown-content {
+            position: absolute;
+            top: 60px;
+            right: 0;
+            background: var(--dark-card);
+            border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(247, 200, 115, 0.3);
+            width: 250px;
+            display: none;
+            z-index: 1000;
+            border: 1px solid var(--primary);
+        }
+
+        .dropdown-content.show {
+            display: block;
+        }
+
+        .dropdown-header {
+            padding: 16px;
+            border-bottom: 1px solid var(--primary);
+        }
+
+        .dropdown-header h4 {
+            color: var(--white);
+            margin-bottom: 4px;
+        }
+
+        .dropdown-header p {
+            color: var(--gray-medium);
+            font-size: 13px;
+        }
+
+        .dropdown-item {
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--white);
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+
+        .dropdown-item:hover {
+            background: var(--dark-light);
+            color: var(--primary);
+        }
+
+        .dropdown-item i {
+            width: 18px;
+            height: 18px;
+            color: var(--primary);
+        }
+
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 6px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--white);
+            transition: 0.3s;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 70px;
+            left: -100%;
+            width: 100%;
+            height: calc(100vh - 70px);
+            background: var(--dark-card);
+            transition: 0.3s;
+            z-index: 999;
+            overflow-y: auto;
+            border-top: 2px solid var(--primary);
+        }
+
+        .mobile-menu.active {
+            left: 0;
+        }
+
+        .mobile-nav-links {
+            padding: 2rem;
+        }
+
+        .mobile-nav-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px;
+            color: var(--white);
+            text-decoration: none;
+            border-bottom: 1px solid var(--primary);
+            transition: 0.3s;
+        }
+
+        .mobile-nav-link:hover {
+            background: var(--dark-light);
+            color: var(--primary);
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: 80px;
+            padding: 2rem;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Welcome Banner */
+        .welcome-banner {
+            background: linear-gradient(135deg, var(--dark-card), var(--dark-light));
+            padding: 2rem;
+            border-radius: 20px;
+            margin-bottom: 2rem;
+            border-left: 6px solid var(--primary);
+            border-right: 6px solid var(--primary);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .welcome-text h1 {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .welcome-text h1 span {
+            color: var(--primary);
+        }
+
+        .welcome-text p {
+            opacity: 0.8;
+            color: var(--gray-medium);
+        }
+
+        .agent-badge {
+            background: var(--primary);
+            padding: 8px 20px;
+            border-radius: 40px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--dark-bg);
+        }
+
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--dark-card);
+            padding: 1.5rem;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: 0.3s;
+            cursor: pointer;
+            border: 1px solid var(--dark-light);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 5px 20px rgba(247, 200, 115, 0.2);
+        }
+
+        .stat-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(247, 200, 115, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .stat-icon i {
+            width: 24px;
+            height: 24px;
+            color: var(--primary);
+        }
+
+        .stat-info h3 {
+            font-size: 14px;
+            color: var(--gray-medium);
+            margin-bottom: 4px;
+        }
+
+        .stat-info p {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--white);
+        }
+
+        /* Section Title */
+        .section-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            margin-top: 2rem;
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 10px;
+        }
+
+        .section-title h2 {
+            color: var(--white);
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title h2 i {
+            color: var(--primary);
+        }
+
+        .view-all {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        /* Tickets Grid (similar to properties) */
+        .tickets-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .ticket-card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--dark-light);
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .ticket-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 5px 20px rgba(247, 200, 115, 0.2);
+        }
+
+        .ticket-header {
+            padding: 1rem 1.5rem;
+            background: var(--dark-light);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--primary);
+        }
+
+        .ticket-id {
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .ticket-priority {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .priority-high { background: var(--danger); color: white; }
+        .priority-medium { background: var(--warning); color: var(--dark-bg); }
+        .priority-low { background: var(--success); color: white; }
+
+        .ticket-info {
+            padding: 1.5rem;
+        }
+
+        .ticket-info h3 {
+            color: var(--white);
+            margin-bottom: 8px;
+            font-size: 18px;
+        }
+
+        .ticket-details {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+            font-size: 13px;
+            color: var(--gray-medium);
+            flex-wrap: wrap;
+        }
+
+        .ticket-status {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .status-open { background: var(--info); color: white; }
+        .status-progress { background: var(--warning); color: var(--dark-bg); }
+        .status-resolved { background: var(--success); color: white; }
+        .status-closed { background: var(--gray-medium); color: white; }
+
+        .ticket-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 1rem;
+        }
+
+        .action-btn {
+            flex: 1;
+            padding: 8px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            text-align: center;
+            border: none;
+        }
+
+        .btn-edit {
+            background: var(--primary);
+            color: var(--dark-bg);
+        }
+
+        .btn-view {
+            background: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-edit:hover, .btn-view:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Tickets List (for All Tickets section) */
+        .tickets-list {
+            background: var(--dark-card);
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+
+        .ticket-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--dark-light);
+            cursor: pointer;
+            transition: 0.3s;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .ticket-item:hover {
+            background: var(--dark-light);
+        }
+
+        .ticket-avatar {
+            width: 50px;
+            height: 50px;
+            background: rgba(247, 200, 115, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ticket-avatar i {
+            width: 24px;
+            height: 24px;
+            color: var(--primary);
+        }
+
+        .ticket-item-info {
+            flex: 1;
+        }
+
+        .ticket-item-info h4 {
+            color: var(--white);
+            margin-bottom: 4px;
+        }
+
+        .ticket-item-info p {
+            color: var(--gray-medium);
+            font-size: 13px;
+        }
+
+        .ticket-meta {
+            min-width: 150px;
+        }
+
+        .ticket-meta p {
+            color: var(--primary);
+            font-weight: 500;
+        }
+
+        /* Analytics */
+        .analytics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .analytics-card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            padding: 1.5rem;
+            border: 1px solid var(--dark-light);
+        }
+
+        .analytics-card h3 {
+            color: var(--white);
+            margin-bottom: 1rem;
+            font-size: 16px;
+        }
+
+        .chart-bars {
+            display: flex;
+            align-items: flex-end;
+            gap: 15px;
+            height: 200px;
+            margin-top: 1rem;
+        }
+
+        .chart-bar {
+            flex: 1;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: 8px;
+            transition: height 0.5s;
+            position: relative;
+        }
+
+        .chart-bar span {
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 12px;
+            color: var(--gray-medium);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--dark-card);
+            border-radius: 20px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 85vh;
+            overflow-y: auto;
+            border: 2px solid var(--primary);
+        }
+
+        .modal-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--primary);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h3 {
+            color: var(--white);
+        }
+
+        .modal-close {
+            font-size: 28px;
+            cursor: pointer;
+            color: var(--gray-medium);
+        }
+
+        .modal-body {
+            padding: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            color: var(--white);
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            background: var(--dark-light);
+            border: 1px solid var(--gray-medium);
+            border-radius: 8px;
+            color: var(--white);
+        }
+
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .modal-footer {
+            padding: 1.5rem;
+            border-top: 1px solid var(--primary);
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+        }
+
+        .btn-submit {
+            padding: 10px 24px;
+            background: var(--primary);
+            border: none;
+            border-radius: 8px;
+            color: var(--dark-bg);
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .btn-cancel {
+            padding: 10px 24px;
+            background: transparent;
+            border: 1px solid var(--primary);
+            border-radius: 8px;
+            color: var(--primary);
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+            .hamburger {
+                display: flex;
+            }
+            .main-content {
+                padding: 1rem;
+            }
+            .welcome-text h1 {
+                font-size: 24px;
+            }
+            .ticket-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">STACKLY<span>ITSM</span></a>
+
+            <div class="nav-menu">
+                <a href="#" class="nav-link active" onclick="showSection('dashboard'); return false;">
+                    <i data-lucide="home"></i> Dashboard
+                </a>
+                <a href="#" class="nav-link" onclick="showSection('tickets'); return false;">
+                    <i data-lucide="ticket"></i> Tickets
+                </a>
+                <a href="#" class="nav-link" onclick="showSection('analytics'); return false;">
+                    <i data-lucide="bar-chart"></i> Analytics
+                </a>
+                <a href="#" class="nav-link" onclick="showSection('settings'); return false;">
+                    <i data-lucide="settings"></i> Settings
+                </a>
+                
+                <div class="profile-dropdown" id="profileDropdown">
+                    <div class="profile-btn" onclick="toggleDropdown()">
+                        <img src="hr27.webp" alt="Profile">
+                        <span id="profileName">Support Agent</span>
+                        <i data-lucide="chevron-down"></i>
+                    </div>
+                    <div class="dropdown-content" id="dropdownContent">
+                        <div class="dropdown-header">
+                            <h4 id="dropdownName">Support Agent</h4>
+                            <p id="dropdownEmail"></p>
+                        </div>
+                        <a href="#" class="dropdown-item" onclick="window.location.href='404.html'">
+                            <i data-lucide="user"></i> My Profile
+                        </a>
+                        <a href="#" class="dropdown-item" onclick="window.location.href='404.html'">
+                            <i data-lucide="settings"></i> Account Settings
+                        </a>
+                        <a href="index.html" class="dropdown-item">
+                            <i data-lucide="home"></i> Back to Home
+                        </a>
+                        <a href="login.html" class="dropdown-item" onclick="logout()">
+                            <i data-lucide="log-out"></i> Sign Out
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hamburger" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-nav-links">
+            <a href="#" class="mobile-nav-link" onclick="showSection('dashboard'); toggleMobileMenu(); return false;">
+                <i data-lucide="home"></i> Dashboard
+            </a>
+            <a href="#" class="mobile-nav-link" onclick="showSection('tickets'); toggleMobileMenu(); return false;">
+                <i data-lucide="ticket"></i> Tickets
+            </a>
+            <a href="#" class="mobile-nav-link" onclick="showSection('analytics'); toggleMobileMenu(); return false;">
+                <i data-lucide="bar-chart"></i> Analytics
+            </a>
+            <a href="#" class="mobile-nav-link" onclick="showSection('settings'); toggleMobileMenu(); return false;">
+                <i data-lucide="settings"></i> Settings
+            </a>
+            <div style="border-top: 1px solid var(--primary); margin: 1rem 0;"></div>
+            <a href="index.html" class="mobile-nav-link">
+                <i data-lucide="home"></i> Back to Home
+            </a>
+            <a href="login.html" class="mobile-nav-link" onclick="logout()">
+                <i data-lucide="log-out"></i> Sign Out
+            </a>
+        </div>
+    </div>
+
+    <main class="main-content">
+        <!-- DASHBOARD SECTION -->
+        <div id="dashboard-section">
+            <div class="welcome-banner">
+                <div class="welcome-text">
+                    <h1>Welcome back, <span id="welcomeName">Support Agent</span>!</h1>
+                    <p id="welcomeEmail"></p>
+                </div>
+                <div class="agent-badge">
+                    <i data-lucide="headphones"></i>
+                    <span>SUPPORT AGENT</span>
+                </div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card" onclick="showSection('tickets')">
+                    <div class="stat-icon"><i data-lucide="ticket"></i></div>
+                    <div class="stat-info">
+                        <h3>Total Tickets</h3>
+                        <p id="totalTickets">0</p>
+                    </div>
+                </div>
+                <div class="stat-card" onclick="showSection('tickets')">
+                    <div class="stat-icon"><i data-lucide="alert-circle"></i></div>
+                    <div class="stat-info">
+                        <h3>Open Tickets</h3>
+                        <p id="openTickets">0</p>
+                    </div>
+                </div>
+                <div class="stat-card" onclick="showSection('tickets')">
+                    <div class="stat-icon"><i data-lucide="clock"></i></div>
+                    <div class="stat-info">
+                        <h3>In Progress</h3>
+                        <p id="progressTickets">0</p>
+                    </div>
+                </div>
+                <div class="stat-card" onclick="showSection('tickets')">
+                    <div class="stat-icon"><i data-lucide="check-circle"></i></div>
+                    <div class="stat-info">
+                        <h3>Resolved</h3>
+                        <p id="resolvedTickets">0</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-title">
+                <h2><i data-lucide="ticket"></i> Recent Tickets</h2>
+                <span class="view-all" onclick="showSection('tickets')">View All <i data-lucide="arrow-right"></i></span>
+            </div>
+            <div class="tickets-grid" id="recentTickets"></div>
+
+            <div class="section-title">
+                <h2><i data-lucide="clock"></i> Pending Activities</h2>
+            </div>
+            <div class="tickets-list" id="pendingActivities"></div>
+        </div>
+
+        <!-- TICKETS SECTION -->
+        <div id="tickets-section" style="display: none;">
+            <div class="section-title">
+                <h2><i data-lucide="ticket"></i> All Support Tickets</h2>
+                <button class="view-all" onclick="openAddTicketModal()" style="background: none; border: none;">
+                    <i data-lucide="plus-circle"></i> New Ticket
+                </button>
+            </div>
+            <div class="tickets-list" id="allTicketsList"></div>
+        </div>
+
+        <!-- ANALYTICS SECTION -->
+        <div id="analytics-section" style="display: none;">
+            <div class="section-title">
+                <h2><i data-lucide="bar-chart"></i> Ticket Analytics</h2>
+            </div>
+            <div class="analytics-grid">
+                <div class="analytics-card">
+                    <h3>Tickets Created (Last 6 Months)</h3>
+                    <div class="chart-bars" id="ticketsChart"></div>
+                </div>
+                <div class="analytics-card">
+                    <h3>Resolution Time by Priority</h3>
+                    <div class="chart-bars" id="resolutionChart"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SETTINGS SECTION -->
+        <div id="settings-section" style="display: none;">
+            <div class="section-title">
+                <h2><i data-lucide="settings"></i> Agent Settings</h2>
+            </div>
+            <div class="tickets-grid">
+                <div class="ticket-card">
+                    <div class="ticket-info">
+                        <h3>Profile Information</h3>
+                        <p>Update your personal and professional details</p>
+                        <div style="margin: 1rem 0; color: var(--gray-medium);">
+                            <p><strong>Name:</strong> Support Agent</p>
+                            <p><strong>Email:</strong> agent@stackly.com</p>
+                            <p><strong>Role:</strong> Senior Support Agent</p>
+                            <p><strong>Department:</strong> IT Service Desk</p>
+                        </div>
+                        <button class="action-btn btn-edit" onclick="window.location.href='404.html'">Edit Profile</button>
+                    </div>
+                </div>
+                <div class="ticket-card">
+                    <div class="ticket-info">
+                        <h3>Notification Preferences</h3>
+                        <p>Manage email and in-app notifications</p>
+                        <div style="margin: 1rem 0; color: var(--gray-medium);">
+                            <p>New Ticket Assignment: Yes</p>
+                            <p>Ticket Updates: Yes</p>
+                            <p>SLA Breach Alerts: Yes</p>
+                            <p>Daily Summary: Yes</p>
+                        </div>
+                        <button class="action-btn btn-edit" onclick="window.location.href='404.html'">Configure</button>
+                    </div>
+                </div>
+                <div class="ticket-card">
+                    <div class="ticket-info">
+                        <h3>Quick Actions</h3>
+                        <p>Common support tasks</p>
+                        <div style="margin: 1rem 0; display: flex; gap: 10px; flex-direction: column;">
+                            <button class="action-btn btn-view" onclick="openAddTicketModal()">Create New Ticket</button>
+                            <button class="action-btn btn-view" onclick="showSection('tickets')">View All Tickets</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Add Ticket Modal -->
+    <div id="addTicketModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Create New Support Ticket</h3>
+                <span class="modal-close" onclick="closeAddTicketModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="ticketForm">
+                    <div class="form-group">
+                        <label>Ticket Title *</label>
+                        <input type="text" id="ticketTitle" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Customer Name *</label>
+                        <input type="text" id="customerName" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email *</label>
+                        <input type="email" id="customerEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Priority *</label>
+                        <select id="ticketPriority">
+                            <option value="High">High</option>
+                            <option value="Medium" selected>Medium</option>
+                            <option value="Low">Low</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Status *</label>
+                        <select id="ticketStatus">
+                            <option value="open">Open</option>
+                            <option value="in-progress">In Progress</option>
+                            <option value="resolved">Resolved</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Category</label>
+                        <select id="ticketCategory">
+                            <option>Technical Issue</option>
+                            <option>Account Access</option>
+                            <option>Billing</option>
+                            <option>Feature Request</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea id="ticketDesc" rows="3" placeholder="Describe the issue..."></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-cancel" onclick="closeAddTicketModal()">Cancel</button>
+                <button class="btn-submit" onclick="addTicket()">Create Ticket</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        // Sample Tickets Data
+        let tickets = [
+            { id: "TKT-1001", title: "VPN Connection Failure", customer: "Rahul Sharma", email: "rahul@example.com", priority: "High", status: "open", category: "Technical Issue", created: "2026-04-01", description: "Unable to connect to office VPN" },
+            { id: "TKT-1002", title: "Password Reset Request", customer: "Priya Patel", email: "priya@example.com", priority: "Low", status: "resolved", category: "Account Access", created: "2026-03-30", description: "Forgot password, need reset link" },
+            { id: "TKT-1003", title: "Email Sync Issue", customer: "Amit Kumar", email: "amit@example.com", priority: "Medium", status: "in-progress", category: "Technical Issue", created: "2026-04-02", description: "Outlook not syncing properly" },
+            { id: "TKT-1004", title: "Software Installation", customer: "Neha Gupta", email: "neha@example.com", priority: "Low", status: "open", category: "Feature Request", created: "2026-04-02", description: "Need Adobe Creative Cloud installed" },
+            { id: "TKT-1005", title: "Server Downtime Alert", customer: "IT Dept", email: "it@company.com", priority: "High", status: "in-progress", category: "Technical Issue", created: "2026-04-03", description: "Production server showing high latency" }
+        ];
+
+        let nextTicketId = 1006;
+
+        // Helper Functions
+        function updateStats() {
+            const total = tickets.length;
+            const open = tickets.filter(t => t.status === 'open').length;
+            const progress = tickets.filter(t => t.status === 'in-progress').length;
+            const resolved = tickets.filter(t => t.status === 'resolved').length;
+            document.getElementById('totalTickets').innerText = total;
+            document.getElementById('openTickets').innerText = open;
+            document.getElementById('progressTickets').innerText = progress;
+            document.getElementById('resolvedTickets').innerText = resolved;
+        }
+
+        function getPriorityClass(priority) {
+            if (priority === 'High') return 'priority-high';
+            if (priority === 'Medium') return 'priority-medium';
+            return 'priority-low';
+        }
+
+        function getStatusClass(status) {
+            if (status === 'open') return 'status-open';
+            if (status === 'in-progress') return 'status-progress';
+            if (status === 'resolved') return 'status-resolved';
+            return 'status-closed';
+        }
+
+        function renderTicketCards(containerId, ticketsList) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+            container.innerHTML = ticketsList.map(ticket => `
+                <div class="ticket-card" onclick="window.location.href='404.html'">
+                    <div class="ticket-header">
+                        <span class="ticket-id">${ticket.id}</span>
+                        <span class="ticket-priority ${getPriorityClass(ticket.priority)}">${ticket.priority}</span>
+                    </div>
+                    <div class="ticket-info">
+                        <h3>${ticket.title}</h3>
+                        <div class="ticket-details">
+                            <span><i data-lucide="user"></i> ${ticket.customer}</span>
+                            <span><i data-lucide="calendar"></i> ${ticket.created}</span>
+                            <span class="ticket-status ${getStatusClass(ticket.status)}">${ticket.status.toUpperCase()}</span>
+                        </div>
+                        <p style="color: var(--gray-medium); font-size: 13px; margin-top: 8px;">${ticket.description.substring(0, 80)}...</p>
+                        <div class="ticket-actions">
+                            <button class="action-btn btn-edit" onclick="event.stopPropagation(); window.location.href='404.html'">Update</button>
+                            <button class="action-btn btn-view" onclick="event.stopPropagation(); window.location.href='404.html'">View Details</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+            lucide.createIcons();
+        }
+
+        function renderTicketsList(containerId, ticketsList) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+            container.innerHTML = ticketsList.map(ticket => `
+                <div class="ticket-item" onclick="window.location.href='404.html'">
+                    <div class="ticket-avatar"><i data-lucide="ticket"></i></div>
+                    <div class="ticket-item-info">
+                        <h4>${ticket.id} - ${ticket.title}</h4>
+                        <p>${ticket.customer} · ${ticket.email} · ${ticket.created}</p>
+                        <p style="font-size: 12px;">${ticket.description.substring(0, 100)}...</p>
+                    </div>
+                    <div class="ticket-meta">
+                        <p>Priority: ${ticket.priority}</p>
+                        <span class="ticket-status ${getStatusClass(ticket.status)}" style="display: inline-block; margin-top: 5px;">${ticket.status.toUpperCase()}</span>
+                    </div>
+                </div>
+            `).join('');
+            lucide.createIcons();
+        }
+
+        function renderCharts() {
+            // Monthly tickets chart
+            const ticketsChart = document.getElementById('ticketsChart');
+            ticketsChart.innerHTML = `
+                <div class="chart-bar" style="height: 80px"><span>Jan</span></div>
+                <div class="chart-bar" style="height: 110px"><span>Feb</span></div>
+                <div class="chart-bar" style="height: 95px"><span>Mar</span></div>
+                <div class="chart-bar" style="height: 140px"><span>Apr</span></div>
+                <div class="chart-bar" style="height: 120px"><span>May</span></div>
+                <div class="chart-bar" style="height: 130px"><span>Jun</span></div>
+            `;
+            
+            // Resolution time by priority chart
+            const resolutionChart = document.getElementById('resolutionChart');
+            resolutionChart.innerHTML = `
+                <div class="chart-bar" style="height: 150px"><span>High</span></div>
+                <div class="chart-bar" style="height: 100px"><span>Medium</span></div>
+                <div class="chart-bar" style="height: 60px"><span>Low</span></div>
+            `;
+        }
+
+        function showSection(section) {
+            document.getElementById('dashboard-section').style.display = 'none';
+            document.getElementById('tickets-section').style.display = 'none';
+            document.getElementById('analytics-section').style.display = 'none';
+            document.getElementById('settings-section').style.display = 'none';
+            
+            document.getElementById(section + '-section').style.display = 'block';
+            
+            if (section === 'tickets') {
+                renderTicketsList('allTicketsList', tickets);
+            } else if (section === 'analytics') {
+                renderCharts();
+            } else if (section === 'dashboard') {
+                renderTicketCards('recentTickets', tickets.slice(0, 3));
+                renderTicketsList('pendingActivities', tickets.filter(t => t.status !== 'resolved').slice(0, 3));
+                updateStats();
+            }
+            
+            // Update active nav link
+            document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sectionMap = { dashboard: 0, tickets: 1, analytics: 2, settings: 3 };
+            if (navLinks[sectionMap[section]]) navLinks[sectionMap[section]].classList.add('active');
+            
+            lucide.createIcons();
+        }
+
+        function addTicket() {
+            const title = document.getElementById('ticketTitle').value.trim();
+            const customer = document.getElementById('customerName').value.trim();
+            const email = document.getElementById('customerEmail').value.trim();
+            const priority = document.getElementById('ticketPriority').value;
+            const status = document.getElementById('ticketStatus').value;
+            const category = document.getElementById('ticketCategory').value;
+            const description = document.getElementById('ticketDesc').value.trim();
+            
+            if (!title || !customer || !email) {
+                alert('Please fill all required fields (Title, Customer Name, Email)');
+                return;
+            }
+            
+            const newTicket = {
+                id: `TKT-${nextTicketId++}`,
+                title,
+                customer,
+                email,
+                priority,
+                status,
+                category,
+                created: new Date().toISOString().slice(0,10),
+                description: description || 'No description provided'
+            };
+            
+            tickets.unshift(newTicket);
+            renderTicketsList('allTicketsList', tickets);
+            renderTicketCards('recentTickets', tickets.slice(0, 3));
+            renderTicketsList('pendingActivities', tickets.filter(t => t.status !== 'resolved').slice(0, 3));
+            updateStats();
+            closeAddTicketModal();
+            alert(`Ticket ${newTicket.id} created successfully!`);
+        }
+
+        function openAddTicketModal() {
+            document.getElementById('addTicketModal').classList.add('show');
+        }
+
+        function closeAddTicketModal() {
+            document.getElementById('addTicketModal').classList.remove('show');
+            document.getElementById('ticketForm').reset();
+        }
+
+        function toggleDropdown() {
+            document.getElementById('dropdownContent').classList.toggle('show');
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('mobileMenu').classList.toggle('active');
+            document.querySelector('.hamburger').classList.toggle('active');
+        }
+
+        function logout() {
+            localStorage.removeItem('re_user');
+            window.location.href = 'index.html';
+        }
+
+        window.onclick = function(event) {
+            if (!event.target.closest('.profile-dropdown')) {
+                document.getElementById('dropdownContent')?.classList.remove('show');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            updateStats();
+            renderTicketCards('recentTickets', tickets.slice(0, 3));
+            renderTicketsList('pendingActivities', tickets.filter(t => t.status !== 'resolved').slice(0, 3));
+            lucide.createIcons();
+        });
+    </script>
+</body>
+</html>

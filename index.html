@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
+    <title>IT Ticketing | Black · Green · White | Fully Responsive</title>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+       html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    font-family: 'Inter', sans-serif;
+    background: #0a0a0a;
+    color: #e0e0e0;
+    box-sizing: border-box;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    max-width: 100%;
+}
+        /* ========== NAVBAR (green/black) ========== */
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    overflow-x: hidden;
+    font-family: 'Inter', sans-serif;
+    background: #0a0a0a;
+    color: #e0e0e0;
+}
+
+
+/* apply max-width only to media */
+img, video, iframe {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    z-index: 9999;
+    width: 100%;
+    background: #000;
+    border-bottom: 2px solid #10b981;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+}
+
+.nav-container {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 80px;
+}
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+        .logo-img {
+            width: 150px;
+            height: auto;
+        }
+        .logo-text {
+            font-size: 1.6rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ffffff, #10b981);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            list-style: none;
+        }
+        .nav-menu li a {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0.6rem 1.3rem;
+            font-weight: 500;
+            font-size: 0.9rem;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 60px;
+            background: rgba(255,255,255,0.03);
+            transition: 0.25s;
+            white-space: nowrap;
+        }
+        .nav-menu li a i { color: #10b981; }
+        .nav-menu li a:hover { background: #10b981; color: #000; }
+        .nav-menu li a:hover i { color: #000; }
+        .login-link { background: rgba(16,185,129,0.1); border: 1.5px solid #10b981; }
+        .getstarted-btn { background: #10b981 !important; color: #000 !important; font-weight: 700; }
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            background: #10b98120;
+            width: 48px;
+            height: 48px;
+            border-radius: 60px;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #10b981;
+        }
+        .hamburger i { font-size: 1.7rem; color: #10b981; }
+        @media screen and (max-width: 768px) {
+            .nav-container { padding: 0 1.2rem; height: 70px; }
+            .hamburger { display: flex; }
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: #000000f2;
+                backdrop-filter: blur(16px);
+                flex-direction: column;
+                justify-content: center;
+                align-items: stretch;
+                gap: 1rem;
+                padding: 2rem;
+                border-top: 2px solid #10b981;
+                transform: translateX(100%);
+                transition: transform 0.3s ease;
+                pointer-events: none;
+                z-index: 9999;
+            }
+            .nav-menu.active { transform: translateX(0); pointer-events: auto; }
+            .nav-menu li a { justify-content: center; width: 100%; padding: 1rem; font-size: 1rem; }
+        }
+        @media screen and (min-width: 769px) {
+            .nav-menu { position: static !important; transform: none !important; pointer-events: auto !important; background: transparent !important; flex-direction: row !important; padding: 0 !important; }
+        }
+        /* ========== HERO VIDEO SECTION ========== */
+        .hero-curve {
+            position: relative;
+            overflow: hidden;
+            padding: 4rem 2rem 8rem 2rem;
+            border-bottom: 2px solid #10b981;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+            filter: brightness(0.4) contrast(1.1);
+        }
+        .hero-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 3rem;
+            position: relative;
+            z-index: 2;
+        }
+        .hero-content { flex: 1; min-width: 280px; }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(16,185,129,0.2);
+            border: 1px solid rgba(16,185,129,0.5);
+            border-radius: 60px;
+            padding: 0.4rem 1rem;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #10b981;
+            margin-bottom: 1.5rem;
+            backdrop-filter: blur(4px);
+        }
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1.2rem;
+            background: linear-gradient(135deg, #ffffff, #10b981, #34d399);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .hero-highlight { color: #10b981; }
+        .hero-description {
+            font-size: 1.05rem;
+            color: #e2e8f0;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            max-width: 550px;
+        }
+        .hero-buttons { display: flex; gap: 1rem; flex-wrap: wrap; }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0.85rem 1.8rem;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .btn-primary { background: #10b981; color: #000; box-shadow: 0 6px 14px rgba(16,185,129,0.3); }
+        .btn-primary:hover { background: #0e9f6e; transform: translateY(-3px); }
+        .btn-secondary { background: rgba(255,255,255,0.1); border: 1px solid rgba(16,185,129,0.6); color: #fff; backdrop-filter: blur(4px); }
+        .btn-secondary:hover { background: rgba(16,185,129,0.2); transform: translateY(-3px); }
+        .hero-stats { flex: 1; min-width: 280px; display: flex; flex-direction: column; gap: 1.2rem; }
+        .stat-card {
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(12px);
+            border-radius: 32px;
+            padding: 1.2rem 1.5rem;
+            border: 1px solid rgba(16,185,129,0.3);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.3s;
+        }
+        .stat-card:hover { transform: translateX(8px); border-color: #10b981; background: rgba(16,185,129,0.1); }
+        .stat-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(16,185,129,0.2);
+            border-radius: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            color: #10b981;
+        }
+        .stat-info h3 { font-size: 1.3rem; font-weight: 700; }
+        .stat-info p { font-size: 0.85rem; color: #cbd5e1; }
+        .custom-shape-divider {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+            z-index: 3;
+        }
+        .custom-shape-divider svg { position: relative; display: block; width: calc(100% + 1.3px); height: 80px; }
+        .shape-fill { fill: #0a0a0a; }
+        @media (max-width: 850px) {
+            .hero-curve { padding: 3rem 1.5rem 6rem; }
+            .hero-content h1 { font-size: 2.5rem; }
+            .hero-container { flex-direction: column; text-align: center; }
+            .hero-description { margin-left: auto; margin-right: auto; }
+            .hero-buttons { justify-content: center; }
+        }
+        /* ========== OTHER SECTIONS (public sector, stats, services, etc) ========== */
+        #pgwda-public-sector-hero { width: 100%; min-height: auto; padding: 60px 6%; background: #fff; }
+        .pgwda-hero-container { max-width: 1400px; margin: auto; display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 60px; }
+        .pgwda-hero-content h1 { font-size: 4rem; color: #00a86b; margin-bottom: 30px; }
+        .pgwda-hero-content p { font-size: 1.3rem; color: #333; margin-bottom: 40px; }
+        .pgwda-hero-btn { background: #111; color: #fff; padding: 18px 34px; border-radius: 50px; text-decoration: none; display: inline-flex; align-items: center; gap: 12px; }
+        .pgwda-hero-image { position: relative; height: 500px; border-radius: 24px; overflow: hidden; }
+        .pgwda-hero-image img { width: 100%; height: 100%; object-fit: cover; }
+        .pgwda-floating-card { position: absolute; left: 30px; bottom: 30px; background: rgba(15, 15, 15, 0.9); padding: 18px 22px; border-radius: 18px; border-left: 5px solid #00a86b; }
+        @media (max-width: 860px) { .pgwda-hero-container { grid-template-columns: 1fr; } .pgwda-hero-content h1 { font-size: 2.8rem; } .pgwda-hero-image { height: 380px; } }
+        #pgwda-live-stats-section { background: #f4f4f4; padding: 70px 6%; }
+        .pgwda-live-stats-wrapper { max-width: 1400px; margin: auto; display: grid; grid-template-columns: repeat(3,1fr); gap: 40px; }
+        .pgwda-stat-box { display: flex; align-items: center; gap: 28px; }
+        .pgwda-stat-box h2 { font-size: 5rem; color: #73c6a2; font-weight: 800; }
+        .pgwda-stat-divider { width: 2px; height: 80px; background: #73c6a2; }
+        .pgwda-stat-box p { color: #222; font-weight: 500; }
+        @media (max-width: 768px) { .pgwda-live-stats-wrapper { grid-template-columns: 1fr; } .pgwda-stat-box { flex-direction: column; text-align: center; gap: 12px; } .pgwda-stat-divider { width: 80px; height: 2px; } }
+        #pgwda-services-heading { text-align: center; margin: 70px 0 30px; }
+        #pgwda-services-heading h2 { font-size: 3rem; color: white; }
+        #pgwda-services-heading h2::after { content: ""; display: block; width: 90px; height: 4px; background: #16a34a; margin: 18px auto 0; }
+        #pgwda-ticket-services { padding: 80px 6%; background: #f5f5f5; }
+        .pgwda-ticket-services-container { max-width: 1400px; margin: auto; display: grid; grid-template-columns: repeat(3,1fr); gap: 30px; }
+        .pgwda-ticket-service-card { background: #fff; border-radius: 18px; overflow: hidden; transition: 0.3s; box-shadow: 0 8px 20px rgba(0,0,0,0.06); }
+        .pgwda-ticket-service-card:hover { transform: translateY(-10px); border-bottom: 3px solid #16a34a; }
+        .pgwda-ticket-service-image { height: 220px; overflow: hidden; }
+        .pgwda-ticket-service-image img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+        .pgwda-ticket-service-card:hover img { transform: scale(1.08); }
+        .pgwda-ticket-service-content { padding: 24px; }
+        .pgwda-ticket-service-content h3 { font-size: 1.5rem; color: #111; margin-bottom: 14px; }
+        .pgwda-ticket-service-content p { color: #555; margin-bottom: 24px; }
+        .pgwda-ticket-btn { background: #111; color: #fff; padding: 13px 26px; border-radius: 40px; text-decoration: none; display: inline-block; }
+        .pgwda-ticket-btn:hover { background: #16a34a; }
+        @media (max-width: 1100px) { .pgwda-ticket-services-container { grid-template-columns: repeat(2,1fr); } }
+        @media (max-width: 768px) { .pgwda-ticket-services-container { grid-template-columns: 1fr; } }
+        #pgwda-certification-section { background: #fff; padding: 80px 6%; }
+        .pgwda-certification-heading h2 { font-size: 3.5rem; font-weight: 300; color: #111; }
+        .pgwda-certification-heading h2 span { font-weight: 800; color: #16a34a; }
+        .pgwda-certification-logos { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 30px; margin-top: 50px; }
+        .pgwda-certification-circle { width: 120px; height: 120px; background: linear-gradient(135deg,#16a34a,#0f172a); border-radius: 50%; display: flex; flex-direction: column; justify-content: center; align-items: center; color: #fff; }
+        @media (max-width: 768px) { .pgwda-certification-heading h2 { font-size: 2.2rem; text-align: center; } .pgwda-certification-logos { justify-content: center; } }
+        #pgwda-solarwinds-services { background: #101111; padding: 80px 6%; }
+        .pgwda-solarwinds-container { max-width: 1400px; margin: auto; display: grid; grid-template-columns: 1.1fr 1fr; gap: 60px; align-items: center; }
+        .pgwda-solarwinds-left h2 { font-size: 2.8rem; color: #ccc6c7; margin-bottom: 45px; }
+        .pgwda-service-row { display: flex; align-items: center; gap: 24px; padding: 24px 0; border-bottom: 1px solid #ccc; }
+        .pgwda-service-number { font-size: 2.4rem; font-weight: 700; color: #16a34a; }
+        .pgwda-service-content h3 { font-size: 1.4rem; }
+        .pgwda-service-arrow { width: 56px; height: 56px; background: #16a34a; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; color: #fff; font-size: 1.8rem; }
+        .pgwda-solarwinds-right img { width: 100%; border-radius: 26px; }
+        @media (max-width: 992px) { .pgwda-solarwinds-container { grid-template-columns: 1fr; } .pgwda-solarwinds-right { order: -1; } }
+        #pgwda-pledge-section { position: relative; width: 100%; background: #fff; }
+        .pgwda-pledge-image { width: 100%; height: 600px; position: relative; }
+        .pgwda-pledge-image img { width: 100%; height: 100%; object-fit: cover; }
+        .pgwda-pledge-card { position: absolute; top: 50%; right: 6%; transform: translateY(-50%); max-width: 500px; background: #16a34a; padding: 55px 50px; color: #fff; }
+        .pgwda-pledge-card h2 { font-size: 2.2rem; margin-bottom: 22px; }
+        @media (max-width: 992px) { .pgwda-pledge-image { height: 400px; } .pgwda-pledge-card { position: relative; top: auto; right: auto; transform: none; width: calc(100% - 40px); margin: -60px auto 0; padding: 40px; } }
+        #pgwda-ticketing-video-section { padding: 90px 6%; background: #000; text-align: center; }
+        .pgwda-ticketing-heading h2 { font-size: 3rem; color: #fff; margin-bottom: 20px; }
+        .pgwda-ticketing-video-wrapper { position: relative; max-width: 1200px; margin: auto; border-radius: 26px; overflow: hidden; }
+        #pgwdaTicketingVideo { width: 100%; display: block; min-height: 500px; object-fit: cover; }
+        .pgwda-video-control { position: absolute; left: 40px; bottom: 40px; width: 80px; height: 80px; border-radius: 50%; background: #10b981; border: none; font-size: 2rem; cursor: pointer; }
+        @media (max-width: 768px) { #pgwdaTicketingVideo { min-height: 280px; } .pgwda-video-control { width: 55px; height: 55px; left: 20px; bottom: 20px; font-size: 1.5rem; } }
+        #pgwda-team-section { padding: 90px 6%; background: #0a0a0a; }
+        .pgwda-team-header { text-align: center; max-width: 800px; margin: 0 auto 60px; }
+        .pgwda-team-header h2 { font-size: 3rem; color: white; }
+        .pgwda-team-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 40px; max-width: 1400px; margin: auto; }
+        .pgwda-team-card { display: flex; gap: 28px; background: #111; padding: 35px; border-radius: 22px; transition: 0.3s; }
+        .pgwda-team-card:hover { border: 1px solid #16a34a; transform: translateY(-8px); }
+        .pgwda-team-image img { width: 210px; height: 150px; border-radius: 50%; object-fit: cover; border: 4px solid #16a34a; }
+        .pgwda-team-content h3 { font-size: 1.6rem; color: #fff; }
+        .pgwda-team-content h4 { color: #10b981; margin: 8px 0; }
+        @media (max-width: 992px) { .pgwda-team-grid { grid-template-columns: 1fr; } .pgwda-team-card { flex-direction: column; text-align: center; align-items: center; } }
+        /* ========== PREMIUM FOOTER ========== */
+        .premium-footer { background: #000; border-top: 2px solid #10b981; margin-top: 2rem; }
+        .footer-container { max-width: 1440px; margin: auto; padding: 3.5rem 2rem 2rem; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 2.5rem; margin-bottom: 2.5rem; }
+        .footer-logo-img { width: 148px; filter: drop-shadow(0 0 6px #10b981); }
+        .footer-description { color: #b0b0b0; font-size: 0.9rem; max-width: 280px; margin-bottom: 1.5rem; }
+        .footer-heading { color: #10b981; font-size: 1.2rem; margin-bottom: 1.2rem; position: relative; display: inline-block; }
+        .footer-heading::after { content: ''; position: absolute; bottom: -6px; left: 0; width: 40px; height: 2px; background: #10b981; }
+        .footer-links { list-style: none; }
+        .footer-links li { margin-bottom: 0.75rem; }
+        .footer-links a { color: #c0c0c0; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: 0.25s; }
+        .footer-links a:hover { color: #10b981; transform: translateX(6px); }
+        .social-icons { display: flex; gap: 1.2rem; flex-wrap: wrap; }
+        .social-icon { width: 44px; height: 44px; background: rgba(16,185,129,0.1); border-radius: 60px; display: inline-flex; align-items: center; justify-content: center; color: #10b981; font-size: 1.4rem; transition: 0.3s; border: 1px solid rgba(16,185,129,0.3); text-decoration: none; }
+        .social-icon:hover { background: #10b981; color: #000; transform: translateY(-5px); }
+        .newsletter-form { display: flex; flex-direction: column; gap: 0.8rem; }
+        .newsletter-input { background: #111; border: 1px solid #2a2a2a; padding: 0.9rem 1rem; border-radius: 60px; color: white; }
+        .newsletter-input:focus { outline: none; border-color: #10b981; }
+        .newsletter-btn { background: #10b981; border: none; padding: 0.9rem; border-radius: 60px; color: #000; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .newsletter-btn:hover { background: #0e9f6e; transform: scale(1.02); }
+        .footer-bottom { border-top: 1px solid #1a1a1a; padding-top: 1.8rem; text-align: center; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+        .footer-bottom-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+        .footer-bottom-links a { color: #888; text-decoration: none; }
+        .footer-bottom-links a:hover { color: #10b981; }
+        @media (max-width: 768px) { .footer-container { padding: 2.5rem 1.5rem; } .footer-bottom { flex-direction: column; text-align: center; } .footer-bottom-links { justify-content: center; } }
+        /* ========== AI CHATBOT - FULLY RESPONSIVE ========== */
+        .chatbot-container {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            z-index: 1100;
+            font-family: 'Inter', sans-serif;
+        }
+        .chat-toggle {
+            width: 290px;
+            height: 50px;
+            background: #10b981;
+            border-radius: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(16,185,129,0.4);
+            transition: all 0.3s;
+            border: none;
+            color: #000;
+            font-size: 1.8rem;
+        }
+        .chat-window {
+            position: absolute;
+            bottom: -35px;
+            right: 0;
+            width: 360px;
+            height: 520px;
+            background: #0f0f0fe6;
+            backdrop-filter: blur(20px);
+            border-radius: 28px;
+            border: 1px solid rgba(16,185,129,0.4);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transform: scale(0);
+            opacity: 0;
+            transform-origin: bottom right;
+            transition: all 0.3s cubic-bezier(0.2,0.9,0.4,1.1);
+            pointer-events: none;
+            box-shadow: 0 20px 35px -10px black;
+        }
+        .chat-window.open {
+            transform: scale(1);
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .chat-header {
+            background: #10b981;
+            padding: 1rem;
+            color: #000;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .speaker-toggle {
+            background: rgba(0,0,0,0.2);
+            border: none;
+            border-radius: 30px;
+            padding: 5px 10px;
+            font-size: 0.7rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .chat-messages {
+            flex: 1;
+            padding: 1rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .message {
+            max-width: 85%;
+            padding: 0.7rem 1rem;
+            border-radius: 18px;
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+        .user-message {
+            background: #10b981;
+            color: #000;
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+        }
+        .bot-message {
+            background: #1e1e2f;
+            color: #e2e8f0;
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+            border-left: 2px solid #10b981;
+        }
+        .chat-input-area {
+            display: flex;
+            padding: 1rem;
+            gap: 0.5rem;
+            border-top: 1px solid #2a2a2a;
+            background: #0a0a0a;
+        }
+        .chat-input {
+            flex: 1;
+            background: #1a1a2a;
+            border: 1px solid #2a2a3a;
+            border-radius: 40px;
+            padding: 0.7rem 1rem;
+            color: white;
+            outline: none;
+        }
+        .chat-send {
+            background: #10b981;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 40px;
+            color: #000;
+            cursor: pointer;
+        }
+        /* Mobile responsive chatbot */
+        @media (max-width: 550px) {
+            .chatbot-container { bottom: 15px; right: 15px; }
+            .chat-window {
+                width: calc(100vw - 30px);
+                right: 0;
+                bottom: 0px;
+                height: 70vh;
+                max-height: 550px;
+            }
+            .chat-toggle { width: 255px; height: 55px; font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ========== NAVBAR ========== -->
+<nav class="navbar">
+    <div class="nav-container">
+        <a href="index.html" class="logo">
+            <img class="logo-img" src="stacklylogo (1).webp" alt="Logo" onerror="this.src='https://placehold.co/150x50?text=IT+Desk'">
+            <span class="logo-text"></span>
+        </a>
+        <div class="hamburger" id="hamburgerBtn">
+            <i class="fas fa-bars" id="menuIcon"></i>
+        </div>
+        <ul class="nav-menu" id="navMenu">
+            <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="service.html"><i class="fas fa-cogs"></i> Services</a></li>
+            <li><a href="createticket.html"><i class="fas fa-ticket-alt"></i> Create Tickets</a></li>
+            <li><a href="about.html"><i class="fas fa-info-circle"></i> About</a></li>
+            <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+            <li><a href="login.html" class="login-link"><i class="fas fa-key"></i> Login</a></li>
+            <li><a href="getstarted.html" class="getstarted-btn"><i class="fas fa-bolt"></i> Get Started</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- ========== HERO VIDEO SECTION ========== -->
+<section class="hero-curve" data-aos="fade-in">
+    <video class="hero-video" autoplay loop muted playsinline>
+        <source src="48420-453832153_medium.mp4" type="video/mp4">
+    </video>
+    <div class="hero-container">
+        <div class="hero-content" data-aos="fade-up">
+            <div class="hero-badge"><i class="fas fa-robot"></i> AI-Powered IT Support</div>
+            <h1>Smart Ticketing <br> for <span class="hero-highlight">Modern IT Teams</span></h1>
+            <p class="hero-description">Automate workflows, resolve incidents 3x faster, and deliver exceptional client experiences with our intelligent ticketing platform.</p>
+            <div class="hero-buttons">
+                <a href="404.html" class="btn btn-primary"><i class="fas fa-rocket"></i> Get Started</a>
+                <a href="404.html" class="btn btn-secondary"><i class="fas fa-ticket-alt"></i> Create Ticket</a>
+            </div>
+        </div>
+        <div class="hero-stats" data-aos="fade-left">
+            <div class="stat-card"><div class="stat-icon"><i class="fas fa-clock"></i></div><div class="stat-info"><h3>&lt; 2 min</h3><p>Average first response</p></div></div>
+            <div class="stat-card"><div class="stat-icon"><i class="fas fa-chart-line"></i></div><div class="stat-info"><h3>99.9%</h3><p>SLA achievement rate</p></div></div>
+            <div class="stat-card"><div class="stat-icon"><i class="fas fa-users"></i></div><div class="stat-info"><h3>10k+</h3><p>Active IT teams</p></div></div>
+        </div>
+    </div>
+    <div class="custom-shape-divider"><svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path></svg></div>
+</section>
+
+<!-- Public Sector Section -->
+<section id="pgwda-public-sector-hero">
+    <div class="pgwda-hero-container">
+        <div class="pgwda-hero-content" data-aos="fade-right"><h1>Public Sector Powered by GreenTech</h1><p>Discover how public sector agencies are achieving comprehensive full-stack hybrid IT visibility with secure, scalable and modern infrastructure.</p><a href="404.html" class="pgwda-hero-btn">Get Expert Guidance <i class="fas fa-arrow-right"></i></a></div>
+        <div class="pgwda-hero-image" data-aos="fade-left"><img src="learning5.webp" alt="Government"><div class="pgwda-floating-card"><h3>318+</h3><span>Connected Government Systems</span></div></div>
+    </div>
+</section>
+
+<!-- Live Stats -->
+<section id="pgwda-live-stats-section" data-aos="fade-up">
+    <div class="pgwda-live-stats-wrapper">
+        <div class="pgwda-stat-box"><h2 class="pgwda-counter" data-target="84" data-suffix="%">0%</h2><div class="pgwda-stat-divider"></div><p>of Fortune 500® companies use GreenTech</p></div>
+        <div class="pgwda-stat-box"><h2 class="pgwda-counter" data-target="34">0</h2><div class="pgwda-stat-divider"></div><p>Awards received in 2024</p></div>
+        <div class="pgwda-stat-box"><h2 class="pgwda-counter" data-target="300" data-suffix="K+">0K+</h2><div class="pgwda-stat-divider"></div><p>Customers worldwide</p></div>
+    </div>
+</section>
+
+<!-- Services Heading -->
+<div id="pgwda-services-heading" data-aos="fade-up"><h2>IT Ticketing Services</h2><p>Powerful solutions to manage incidents, requests, assets and support operations efficiently.</p></div>
+
+<section id="pgwda-ticket-services">
+    <div class="pgwda-ticket-services-container">
+        <!-- Card 1 -->
+        <div class="pgwda-ticket-service-card" data-aos="flip-left">
+            <div class="pgwda-ticket-service-image"><img src="it12.webp" alt="Incident Management"></div>
+            <div class="pgwda-ticket-service-content"><h3>Incident Management</h3><p>Track, assign and resolve IT incidents quickly with a streamlined ticket workflow.</p><a href="404.html" class="pgwda-ticket-btn">Learn More</a></div>
+        </div>
+        <!-- Card 2 -->
+        <div class="pgwda-ticket-service-card" data-aos="flip-left" data-aos-delay="100">
+            <div class="pgwda-ticket-service-image"><img src="it3.webp" alt="Service Requests"></div>
+            <div class="pgwda-ticket-service-content"><h3>Service Requests</h3><p>Manage employee requests, approvals and support tickets from a single dashboard.</p><a href="404.html" class="pgwda-ticket-btn">Learn More</a></div>
+        </div>
+        <!-- Card 3 -->
+        <div class="pgwda-ticket-service-card" data-aos="flip-left" data-aos-delay="200">
+            <div class="pgwda-ticket-service-image"><img src="it4.webp" alt="Asset Tracking"></div>
+            <div class="pgwda-ticket-service-content"><h3>Asset Tracking</h3><p>Monitor hardware, software and network assets linked directly to support tickets.</p><a href="404.html" class="pgwda-ticket-btn">Learn More</a></div>
+        </div>
+        <!-- Card 4 - NEW -->
+        <div class="pgwda-ticket-service-card" data-aos="flip-left" data-aos-delay="300">
+            <div class="pgwda-ticket-service-image"><img src="it8.webp" alt="Priority Escalation"></div>
+            <div class="pgwda-ticket-service-content"><h3>Priority Escalation</h3><p>Automatically escalate high-priority issues to the right teams for faster response.</p><a href="404.html" class="pgwda-ticket-btn">Learn More</a></div>
+        </div>
+        <!-- Card 5 - NEW -->
+        <div class="pgwda-ticket-service-card" data-aos="flip-left" data-aos-delay="400">
+            <div class="pgwda-ticket-service-image"><img src="it10.webp" alt="Knowledge Base"></div>
+            <div class="pgwda-ticket-service-content"><h3>Knowledge Base</h3><p>Provide users with self-service guides and reduce repetitive support requests.</p><a href="404.html" class="pgwda-ticket-btn">Learn More</a></div>
+        </div>
+        <!-- Card 6 - NEW -->
+        <div class="pgwda-ticket-service-card" data-aos="flip-left" data-aos-delay="500">
+            <div class="pgwda-ticket-service-image"><img src="it11.webp" alt="Analytics Dashboard"></div>
+            <div class="pgwda-ticket-service-content"><h3>Analytics Dashboard</h3><p>Get live ticket reports, SLA metrics and performance insights in one place.</p><a href="404.html" class="pgwda-ticket-btn">Learn More</a></div>
+        </div>
+    </div>
+</section>
+<!-- Certifications -->
+<section id="pgwda-certification-section" data-aos="fade-up">
+    <div class="pgwda-certification-container">
+        <div class="pgwda-certification-heading">
+            <h2>Certified for <span>Excellence</span></h2>
+        </div>
+        <div class="pgwda-certification-logos">
+            <div class="pgwda-certification-circle">
+                <span>ISO</span>
+                <small>27001</small>
+            </div>
+            <div class="pgwda-certification-circle">
+                <span>ITIL</span>
+                <small>Certified</small>
+            </div>
+            <div class="pgwda-certification-circle">
+                <span>SOC</span>
+                <small>Compliant</small>
+            </div>
+            <div class="pgwda-certification-circle">
+                <span>GDPR</span>
+                <small>Ready</small>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- SolarWinds Services -->
+<section id="pgwda-solarwinds-services" data-aos="fade-up">
+    <div class="pgwda-solarwinds-container"><div class="pgwda-solarwinds-left"><h2>Our Services <span>::</span> We Specialize in IT Ticketing Tools</h2>
+    <div class="pgwda-service-row"><div class="pgwda-service-number">1</div><div class="pgwda-service-content"><h3>Project-Based Services</h3><p>Custom ticketing, monitoring and workflow solutions tailored to your business needs.</p></div><a href="404.html" class="pgwda-service-arrow">→</a></div>
+    <div class="pgwda-service-row"><div class="pgwda-service-number">2</div><div class="pgwda-service-content"><h3>Managed Services</h3><p>Continuous monitoring, issue management and analytical support.</p></div><a href="404.html" class="pgwda-service-arrow">→</a></div>
+    <div class="pgwda-service-row"><div class="pgwda-service-number">3</div><div class="pgwda-service-content"><h3>Ticketing Tool Training</h3><p>Learn how to maximize your service desk and ticket management platform efficiently.</p></div><a href="404.html" class="pgwda-service-arrow">→</a></div></div>
+    <div class="pgwda-solarwinds-right"><img src="it2.webp" alt="Dashboard"></div></div>
+</section>
+
+<!-- Pledge Section -->
+<section id="pgwda-pledge-section"><div class="pgwda-pledge-image"><img src="it1.webp" alt="Team"></div><div class="pgwda-pledge-card" data-aos="zoom-in"><h2>Our Commitment</h2><p>We are committed to delivering reliable IT ticketing solutions with honesty, integrity and operational excellence. Our mission is to support customers, employees and organizations with efficient service management and trusted support.</p></div></section>
+
+<!-- Interactive Video -->
+<section id="pgwda-ticketing-video-section" data-aos="fade-up"><div class="pgwda-ticketing-heading"><span class="pgwda-ticketing-tag">✦ INTERACTIVE EXPERIENCE</span><h2>Explore Our IT Ticketing Platform</h2><p>Click play to discover our powerful IT ticketing, incident management and service desk dashboard in action.</p></div><div class="pgwda-ticketing-video-wrapper"><video id="pgwdaTicketingVideo" autoplay muted loop playsinline><source src="99278-653943177_medium.mp4" type="video/mp4"></video><button id="pgwdaVideoControl" class="pgwda-video-control">▶</button></div></section>
+<!-- Team Section (6 members) -->
+<section id="pgwda-team-section" data-aos="fade-up">
+    <div class="pgwda-team-header">
+        <h2>Our Team</h2>
+        <p>Meet our experienced IT ticketing specialists with the knowledge and industry expertise to help solve technical challenges and improve your support operations.</p>
+    </div>
+    <div class="pgwda-team-grid">
+        <!-- Member 1 -->
+        <div class="pgwda-team-card" data-aos="flip-right">
+            <div class="pgwda-team-image"><img src="hr22.webp" alt="Michael Carter"></div>
+            <div class="pgwda-team-content">
+                <h3>Michael Carter</h3>
+                <h4>Service Desk Manager</h4>
+                <p>Michael leads enterprise IT ticketing operations with over 12 years of experience in incident management and workflow automation.</p>
+            </div>
+        </div>
+        <!-- Member 2 -->
+        <div class="pgwda-team-card" data-aos="flip-right" data-aos-delay="100">
+            <div class="pgwda-team-image"><img src="hr23.webp" alt="Sarah Williams"></div>
+            <div class="pgwda-team-content">
+                <h3>Sarah Williams</h3>
+                <h4>IT Support Specialist</h4>
+                <p>Sarah specializes in service requests, escalation management and helping teams build efficient ticketing processes.</p>
+            </div>
+        </div>
+        <!-- Member 3 -->
+        <div class="pgwda-team-card" data-aos="flip-right" data-aos-delay="200">
+            <div class="pgwda-team-image"><img src="hr24.webp" alt="David Johnson"></div>
+            <div class="pgwda-team-content">
+                <h3>David Johnson</h3>
+                <h4>Infrastructure Analyst</h4>
+                <p>David focuses on network monitoring, infrastructure support and system analytics to ensure smooth business operations.</p>
+            </div>
+        </div>
+        <!-- Member 4 -->
+        <div class="pgwda-team-card" data-aos="flip-right" data-aos-delay="300">
+            <div class="pgwda-team-image"><img src="hr25.webp" alt="Emily Brown"></div>
+            <div class="pgwda-team-content">
+                <h3>Emily Brown</h3>
+                <h4>Training & Documentation Lead</h4>
+                <p>Emily creates user-friendly training materials and knowledge base systems to help teams maximize the value of their IT ticketing tools.</p>
+            </div>
+        </div>
+        <!-- Member 5 -->
+        <div class="pgwda-team-card" data-aos="flip-right" data-aos-delay="400">
+            <div class="pgwda-team-image"><img src="hr26.webp" alt="James Wilson"></div>
+            <div class="pgwda-team-content">
+                <h3>James Wilson</h3>
+                <h4>Senior Solutions Architect</h4>
+                <p>James designs custom IT ticketing integrations and automation workflows for enterprise clients worldwide.</p>
+            </div>
+        </div>
+        <!-- Member 6 -->
+        <div class="pgwda-team-card" data-aos="flip-right" data-aos-delay="500">
+            <div class="pgwda-team-image"><img src="hr27.webp" alt="Linda Martinez"></div>
+            <div class="pgwda-team-content">
+                <h3>Linda Martinez</h3>
+                <h4>Customer Success Manager</h4>
+                <p>Linda ensures our clients achieve maximum ROI from their ticketing platform through proactive support and strategic guidance.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ========== PREMIUM FOOTER ========== -->
+<footer class="premium-footer">
+    <div class="footer-container">
+        <div class="footer-grid"><div class="footer-brand"><div class="footer-logo"><img class="footer-logo-img" src="stacklylogo (1).webp" alt="Logo" onerror="this.src='https://placehold.co/148x50?text=IT+Flow'"></div><p class="footer-description">AI-powered IT ticketing solution for modern enterprises. Resolve incidents 3x faster with smart automation.</p><div class="social-icons"><a href="404.html" class="social-icon"><i class="fab fa-facebook-f"></i></a><a href="404.html" class="social-icon"><i class="fab fa-twitter"></i></a><a href="404.html" class="social-icon"><i class="fab fa-linkedin-in"></i></a><a href="404.html" class="social-icon"><i class="fab fa-instagram"></i></a></div></div>
+        <div><h3 class="footer-heading">Quick Links</h3><ul class="footer-links"><li><a href="#"><i class="fas fa-chevron-right"></i> Home</a></li><li><a href="#"><i class="fas fa-chevron-right"></i> Services</a></li><li><a href="#"><i class="fas fa-chevron-right"></i> Create Tickets</a></li><li><a href="#"><i class="fas fa-chevron-right"></i> About Us</a></li><li><a href="#"><i class="fas fa-chevron-right"></i> Contact</a></li></ul></div>
+        <div><h3 class="footer-heading">Support</h3><ul class="footer-links"><li><a href="404.html"><i class="fas fa-life-ring"></i> Help Center</a></li><li><a href="404.html"><i class="fas fa-file-alt"></i> Documentation</a></li><li><a href="404.html"><i class="fas fa-shield-alt"></i> Privacy Policy</a></li><li><a href="404.html"><i class="fas fa-gavel"></i> Terms of Service</a></li></ul></div>
+        <div class="footer-newsletter"><h3 class="footer-heading">Stay Updated</h3><p style="color:#b0b0b0; font-size:0.85rem; margin-bottom:1rem;">Get the latest product updates and IT insights.</p><form class="newsletter-form" id="newsletterForm"><input type="email" class="newsletter-input" id="newsletterEmail" placeholder="Your email address *" required><button type="submit" class="newsletter-btn"><i class="fas fa-paper-plane"></i> Subscribe</button></form></div></div>
+        <div class="footer-bottom"><div>&copy; 2026 TicketFlow — Next‑Gen IT Ticketing. All rights reserved.</div><div class="footer-bottom-links"><a href="404.html">Cookie Policy</a><a href="404.html">Accessibility</a><a href="404.html">Status</a></div></div>
+    </div>
+</footer>
+
+<!-- ========== AI CHATBOT (fully responsive) ========== -->
+<div class="chatbot-container"><div class="chat-toggle" id="chatToggle"><i class="fas fa-comment-dots"></i></div><div class="chat-window" id="chatWindow"><div class="chat-header"><i class="fas fa-robot"></i> TicketFlow AI <button id="speakerToggle" class="speaker-toggle"><i class="fas fa-volume-up"></i> Speak ON</button><i class="fas fa-times" id="closeChat" style="cursor:pointer; margin-left:auto;"></i></div><div class="chat-messages" id="chatMessages"><div class="message bot-message">👋 Hi! I'm your IT ticketing assistant. Ask me about creating tickets, SLA, automation, integrations, pricing, and more.</div></div><div class="chat-input-area"><input type="text" class="chat-input" id="chatInput" placeholder="Ask me anything..."><button class="chat-send" id="sendBtn"><i class="fas fa-paper-plane"></i></button></div></div></div>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init({ duration: 800, once: false, mirror: true, offset: 50 });
+    // Chatbot logic
+    const botResponses = {
+        "what is ticketflow": "TicketFlow is an AI-powered IT ticketing platform that automates incident management, tracks SLAs, and integrates with your existing tools.",
+        "how to create a ticket": "Click the 'Create Ticket' button in the navbar or go to the Create Tickets page. Fill in title, description, priority, and assignee.",
+        "sla": "SLA (Service Level Agreement) defines response and resolution times. TicketFlow tracks SLAs automatically and sends alerts before deadlines.",
+        "automation": "Yes! TicketFlow offers workflow automation: auto-assign tickets, send notifications, escalate overdue tickets, and trigger webhooks.",
+        "integrations": "We integrate with Slack, Microsoft Teams, Jira, GitHub, and REST APIs.",
+        "price": "Contact sales for custom pricing. We offer a free 14-day trial with full features.",
+        "ai features": "Our AI suggests solutions, auto-categorizes tickets, predicts response times, and provides smart replies.",
+        "security": "TicketFlow is SOC2 compliant, uses AES-256 encryption, and offers SSO.",
+        "default": "I'm here to help with IT ticketing questions. You can ask me about creating tickets, SLA, automation, integrations, pricing, AI features, security, reporting, mobile app, or support."
+    };
+    function getBotAnswer(question) {
+        const q = question.toLowerCase();
+        for (let [key, ans] of Object.entries(botResponses)) if (q.includes(key)) return ans;
+        return botResponses["default"];
+    }
+    const chatToggle = document.getElementById('chatToggle'), chatWindow = document.getElementById('chatWindow'), closeChat = document.getElementById('closeChat');
+    const sendBtn = document.getElementById('sendBtn'), chatInput = document.getElementById('chatInput'), chatMessages = document.getElementById('chatMessages');
+    const speakerToggle = document.getElementById('speakerToggle');
+    let speechEnabled = true, speechSynth = window.speechSynthesis, currentUtterance = null;
+    function updateSpeakerUI() { speakerToggle.innerHTML = speechEnabled ? '<i class="fas fa-volume-up"></i> Speak ON' : '<i class="fas fa-volume-mute"></i> Speak OFF'; }
+    function speakText(text) { if (!speechEnabled) return; if (currentUtterance) speechSynth.cancel(); currentUtterance = new SpeechSynthesisUtterance(text); speechSynth.speak(currentUtterance); }
+    speakerToggle.addEventListener('click', () => { speechEnabled = !speechEnabled; updateSpeakerUI(); if (!speechEnabled && currentUtterance) speechSynth.cancel(); });
+    updateSpeakerUI();
+    chatToggle.addEventListener('click', () => chatWindow.classList.add('open'));
+    closeChat.addEventListener('click', () => chatWindow.classList.remove('open'));
+    function addMessage(text, isUser) { let msg = document.createElement('div'); msg.className = `message ${isUser ? 'user-message' : 'bot-message'}`; msg.innerHTML = isUser ? text : `<i class="fas fa-robot"></i> ${text}`; chatMessages.appendChild(msg); chatMessages.scrollTop = chatMessages.scrollHeight; if (!isUser && speechEnabled) speakText(text); }
+    function sendMessage() { let txt = chatInput.value.trim(); if (!txt) return; addMessage(txt, true); chatInput.value = ''; setTimeout(() => { addMessage(getBotAnswer(txt), false); }, 300); }
+    sendBtn.addEventListener('click', sendMessage); chatInput.addEventListener('keypress', e => { if (e.key === 'Enter') sendMessage(); });
+    // Counter animation
+    const counters = document.querySelectorAll('.pgwda-counter');
+    const observer = new IntersectionObserver(entries => { entries.forEach(entry => { if (entry.isIntersecting) { let c = entry.target; if (!c.classList.contains('started')) { c.classList.add('started'); let target = +c.getAttribute('data-target'), suffix = c.getAttribute('data-suffix') || '', current = 0, step = target / 70; let update = () => { current += step; if (current < target) { c.innerText = Math.ceil(current) + suffix; requestAnimationFrame(update); } else c.innerText = target + suffix; }; update(); } } }); }, { threshold: 0.5 });
+    counters.forEach(c => observer.observe(c));
+    // Video control
+    const video = document.getElementById('pgwdaTicketingVideo'), vidBtn = document.getElementById('pgwdaVideoControl');
+    if (vidBtn) vidBtn.addEventListener('click', () => { if (video.paused) { video.play(); vidBtn.innerHTML = '❚❚'; } else { video.pause(); vidBtn.innerHTML = '▶'; } });
+    // Mobile menu toggle
+    const hamburger = document.getElementById('hamburgerBtn'), navMenu = document.getElementById('navMenu'), menuIcon = document.getElementById('menuIcon');
+    if (hamburger) hamburger.addEventListener('click', () => { navMenu.classList.toggle('active'); menuIcon.className = navMenu.classList.contains('active') ? 'fas fa-times' : 'fas fa-bars'; document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : ''; });
+    document.querySelectorAll('#navMenu li a').forEach(link => link.addEventListener('click', () => { if (window.innerWidth <= 768 && navMenu.classList.contains('active')) { navMenu.classList.remove('active'); menuIcon.className = 'fas fa-bars'; document.body.style.overflow = ''; } }));
+    window.addEventListener('resize', () => { if (window.innerWidth > 768 && navMenu.classList.contains('active')) { navMenu.classList.remove('active'); menuIcon.className = 'fas fa-bars'; document.body.style.overflow = ''; } });
+    // Newsletter redirect
+    const newsletterForm = document.getElementById('newsletterForm');
+    if (newsletterForm) newsletterForm.addEventListener('submit', (e) => { e.preventDefault(); let email = document.getElementById('newsletterEmail').value.trim(); if (!email) alert('Email is mandatory'); else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) alert('Valid email required'); else window.location.href = '404.html'; });
+</script>
+</body>
+</html>
